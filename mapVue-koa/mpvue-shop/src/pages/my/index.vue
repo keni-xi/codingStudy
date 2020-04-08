@@ -1,18 +1,17 @@
 <template>
   <div class="my">
     <div class="myinfo">
-      <img src="" alt="">
+      <img :src="avator" alt />
       <div>
-        <p>name</p>
-        <p>点击登录</p>
-        <p>微信用户</p>
+        <p>{{userInfo.nickName}}</p>
+        <p v-if="userInfo.nickName">微信用户</p>
+        <p v-else>点击登录</p>
       </div>
     </div>
     <div class="iconlist">
-      <div v-for="(item, index) in listData" :key="index">
-        <span class="iconfont" :class="item.icon">
-          <span>{{item.title}}</span>
-        </span>
+      <div @click="goTo(item.url)" v-for="(item, index) in listData" :key="index">
+        <span class="iconfont" :class="item.icon"></span>
+        <span>{{item.title}}</span>
       </div>
     </div>
   </div>
@@ -21,7 +20,7 @@
 <script>
 import { get, login, toLogin } from '../../utils'
 export default {
-  data () {
+  data() {
     return {
       listData: [
         {
@@ -65,24 +64,31 @@ export default {
           url: "/pages/feedback/main"
         }
       ],
-
       avator: 'http://yanxuan.nosdn.127.net/8945ae63d940cc42406c3f67019c5cb6.png',
       allcheck: false,
       userInfo: {},
       Listids: []
-    }
+    };
   },
   onShow () {
     if (login()) {
       this.userInfo = login()
-      console.log(userInfo)
-      this.avator = this.userInfo.avator_url
+      console.log(this.userInfo)
+      this.avator = this.userInfo.avatarUrl
+    }
+  },
+  methods: {
+    goTo (url) {
+      console.log(123)
+      wx.navigateTo({
+        url: url
+      });
+        
     }
   }
-
-}
+};
 </script>
 
 <style lang="less" scoped>
-@import './style.less';
+@import "./style.less";
 </style>

@@ -4,7 +4,7 @@ export default {
     // 调用API从本地缓存中获取数据
     var userInfo = {
       openId: "oQmbb4sNZdxaUQZ0sfYgvtOP2S7c",
-      nickName: "蜗牛",
+      nickName: "小黑",
       gender: 1,
       language: "zh_CN",
       city: "Changping",
@@ -45,6 +45,7 @@ export default {
 </script>
 
 <style>
+@import url('./iconfont/iconfont.css');
 .container {
   height: 100%;
   display: flex;

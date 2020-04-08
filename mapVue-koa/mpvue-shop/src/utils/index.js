@@ -88,7 +88,5 @@ export function toLogin () {
 export default {
   formatNumber,
   formatTime,
-  getStorageOpenid,
-  login,
-  toLogin
+  getStorageOpenid
 }
