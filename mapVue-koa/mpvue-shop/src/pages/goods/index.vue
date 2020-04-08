@@ -241,7 +241,7 @@ export default {
           })
           return false
         }
-        const data = await post('cart/addCart', {
+        const data = await post('/cart/addCart', {
           openId: this.openId,
           goodsId: this.goodsId,
           number: this.number

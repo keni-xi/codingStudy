@@ -68,8 +68,27 @@ export function getStorageOpenid () {
   }
 }
 
+export function login () {
+  const userInfo = wx.getStorageSync('userInfo')
+  if (userInfo) {
+    return userInfo
+  }
+}
+export function toLogin () {
+  const userInfo = wx.getStorageSync('userInfo')
+  if (!userInfo) {
+    wx.navigateTo({
+      url: '/pages/login/main'
+    })
+  } else {
+    return true
+  }
+}
+
 export default {
   formatNumber,
   formatTime,
-  getStorageOpenid
+  getStorageOpenid,
+  login,
+  toLogin
 }

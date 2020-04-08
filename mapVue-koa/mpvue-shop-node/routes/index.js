@@ -8,6 +8,8 @@ router.get('/index/index', controllers.home.index)
 
 // 分类相关的接口
 router.get('/category/categoryNav', controllers.category.index.categoryNav)
+router.get('/category/indexaction', controllers.category.index.indexAction)
+router.get('/category/currentaction', controllers.category.index.currentAction)
 
 // 搜索相关的接口
 router.get('/search/indexaction', controllers.search.index.indexAction)
@@ -34,5 +36,9 @@ router.get('/cart/cartList', controllers.cart.index.cartList)
 router.get('/address/getListAction', controllers.address.index.getListAction)
 router.get('/address/detailAction', controllers.address.index.detailAction)
 router.post('/address/saveAction', controllers.address.index.saveAction)
+
+// 专题接口
+router.get('/topic/listaction',controllers.topic.index.listAction)
+router.get('/topic/detailaction', controllers.topic.index.detailAction)
 
 module.exports = router
