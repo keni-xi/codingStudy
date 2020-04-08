@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getStorageOpenid } from '../../utils'
+import { get, getStorageOpenid } from '../../utils'
 export default {
   data () {
     return {

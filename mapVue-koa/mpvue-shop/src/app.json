@@ -1,19 +1,20 @@
 {
   "pages": [
+    "pages/index/main",
+    "pages/cart/main",
     "pages/addressSelect/main",
     "pages/order/main",
-    "pages/index/main",
     "pages/search/main",
     "pages/topic/main",
     "pages/category/main",
-    "pages/cart/main",
     "pages/my/main",
     "pages/mappage/main",
     "pages/brandlist/main",
     "pages/newgoods/main",
     "pages/topicdetail/main",
     "pages/goods/main",
-    "pages/addaddress/main"  
+    "pages/addaddress/main",
+    "pages/categorylist/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

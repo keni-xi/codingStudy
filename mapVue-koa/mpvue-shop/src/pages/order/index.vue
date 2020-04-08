@@ -92,13 +92,13 @@ export default {
       })
     },
     async getDetail () {
+      this.allprice = 0
       const data = await get('/order/detailAction', {
         openId: this.openId,
         addressId: this.addressId
       })
       console.log(data)
       if (data) {
-        // this.allprice = data.price
         this.listData = data.goodsList
         this.address = data.address
       }

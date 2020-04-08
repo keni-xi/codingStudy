@@ -4,7 +4,7 @@
       <input type="text" placeholder="姓名" v-model="userName">
     </div>
     <div class="item">
-      <input type="text" placeholder="手机号" v-model="telNumber">
+      <input type="text" placeholder="手机号码" v-model="telNumber">
     </div>
     <div class="item">
       <picker mode="region" @change="bindRegionChange" :value="region" :custom-item="customItem">
@@ -16,9 +16,9 @@
     </div>
 
     <div class="item itemend">
-      <checkbox-group @click="checkboxChange">
+      <checkbox-group @change="checkboxChange">
         <label class="checkbox">
-          <checkbox class="box" value="true" checked="checked" color="#b4282d"></checkbox>
+          <checkbox class="box" value="true" :checked="checked" color="#b4282d"></checkbox>
           设置为默认地址
         </label>
       </checkbox-group>
@@ -30,18 +30,18 @@
 </template>
 
 <script>
-import { get, post, getStorageOpenid } from '../../utils'
+import { get, post, getStorageOpenid } from "../../utils";
 export default {
   data () {
     return {
       userName: '',
-      telNumber:'',
+      telNumber: '',
       region: [],
       customItem: '全部',
       address: '',
-      openId: '',
       detailaddress: '',
       checked: false,
+      openId: '',
       res: '',
       id: ''
     }
@@ -74,15 +74,62 @@ export default {
       this.detailaddress = detail.address_detail
       this.checked = detail.is_default === 1 ? true : false
     },
-    checkboxChange () {},
-    wxaddress () {},
-    saveAddress () {}
+    checkboxChange (e) {
+      this.checked = e.mp.detail.value[0]
+    },
+    bindRegionChange (e) {
+      console.log(e)
+      let value = e.mp.detail.value
+      this.address = `${value[0]} ${value[1]} ${value[2]}`
+    },
+    wxaddress () {
+      wx.chooseAddress({
+        success: (result) => {
+          console.log(result)
+          this.userName = result.userName
+          this.telNumber = result.telNumber
+          this.address = `${result.provinceName} ${result.cityName} ${result.countyName}`
+          this.detailaddress = result.detailInfo
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+        
+    },
+    async saveAddress () {
+      const data = await post('/address/saveAction', {
+        userName: this.userName,
+        telNumber: this.telNumber,
+        address: this.address,
+        detailaddress: this.detailaddress,
+        checked: this.checked,
+        openId: this.openId,
+        addressId: this.id
+      })
+      console.log(data)
+      if (data.data) {
+        wx.showToast({
+          title: '添加成功',
+          icon: 'success',
+          duration: 2000,
+          mask: true,
+          success: (result) => {
+            setTimeout(() => {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 2000)
+          },
+          fail: () => {},
+          complete: () => {}
+        });
+          
+      }
+    }
   }
-
-
 }
 </script>
 
 <style lang="less" scoped>
-@import './style.less';
+@import "./style.less";
 </style>

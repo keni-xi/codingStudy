@@ -48,6 +48,7 @@ async function cartList(ctx) {
   const cartList = await mysql('nideshop_cart').where({
     'user_id': openId
   }).select()
+  // console.log(cartList)
   ctx.body = {
     data: cartList
   }

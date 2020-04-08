@@ -213,7 +213,7 @@ export default {
     categroyList (id) {
       console.log(123)
       wx.navigateTo({
-        url: '/pages/categroylist/main?id=' + id
+        url: '/pages/categorylist/main?id=' + id
       })
     },
     branddetail (id) {
